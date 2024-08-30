@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
     use HasFactory, HasApiTokens;
 
@@ -18,7 +20,8 @@ class Admin extends Model
         "password",
     ];
 
-    protected $hidden= [
+    protected $hidden = [
         "verify_phone",
     ];
+
 }

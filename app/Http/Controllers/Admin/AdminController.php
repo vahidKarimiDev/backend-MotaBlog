@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminStoreRequest;
 use App\Http\Requests\Admin\AdminUpdateRequest;
-use App\Models\Admin;
 use App\RestApi\Facade\ApiResponse;
-use App\Services\AdminServices;
-use Illuminate\Http\Request;
+use App\Services\Admin\AdminServices;
 use function League\Flysystem\UnableToResolveFilesystemMount;
 
 class AdminController extends Controller
@@ -21,7 +19,7 @@ class AdminController extends Controller
     {
         $this->adminServices = $adminServices;
 
-//        $this->middleware("auth:sanctum")->only("update");
+        $this->middleware("auth:sanctum");
     }
 
     /**
