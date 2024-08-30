@@ -54,8 +54,15 @@ class ApiResponse
                 $data['data'] = $this->array;
             }
         }
-        !is_null($this->message) && $data['message'] = $this->message;
-        !is_null($this->appends) && $data = array_merge($data, $this->appends);
+
+        if (!is_null($this->message) && !empty($this->message)) {
+            $data['message'] = $this->message;
+        }
+
+        if (!is_null($this->appends) && !empty($this->appends)) {
+            $data = array_merge($data, $this->appends);
+        }
+
         return response()->json($data, $this->status);
     }
 }
