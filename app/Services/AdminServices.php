@@ -27,4 +27,17 @@ class AdminServices
         return $result;
     }
 
+    public function showAdmin(string $id)
+    {
+        try {
+            $admin = Admin::find($id);
+
+        } catch (\Throwable $err) {
+            return ApiResponse::withMessage($err->getMessage())->withStatus(500)->build()->response();
+        }
+
+        return $admin;
+    }
+
+
 }
