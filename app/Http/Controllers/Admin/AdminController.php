@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminStoreRequest;
+use App\Http\Requests\Admin\AdminUpdateRequest;
 use App\Models\Admin;
 use App\RestApi\Facade\ApiResponse;
 use App\Services\AdminServices;
@@ -19,6 +20,8 @@ class AdminController extends Controller
     public function __construct(AdminServices $adminServices)
     {
         $this->adminServices = $adminServices;
+
+//        $this->middleware("auth:sanctum")->only("update");
     }
 
     /**
@@ -46,18 +49,23 @@ class AdminController extends Controller
     public function show(string $id)
     {
         $admin = $this->adminServices->showAdmin($id);
-        if (is_null($admin) && empty($admin)) {
-            return ApiResponse::withMessage("Admin Not A Found :(")->withStatus(404)->build()->response();
+        if (!$admin->ok) {
+            return ApiResponse::withMessage($admin->data)->withStatus($admin->status)->build()->response();
         }
-        return ApiResponse::withData($admin)->build()->response();
+        return ApiResponse::withData($admin->data)->build()->response();
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AdminUpdateRequest $request, string $id)
     {
-        //
+        $data = $request->validated();
+        $result = $this->adminServices->updateAdmin($data, $id);
+        if (!$result->ok) {
+            return ApiResponse::withMessage($result->data)->withStatus($result->status)->build()->response();
+        }
+        return ApiResponse::withData($result->data)->build()->response();
     }
 
     /**

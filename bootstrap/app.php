@@ -16,5 +16,14 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->render(function (\Illuminate\Auth\AuthenticationException $e, \Illuminate\Http\Request $request) {
+            if ($request->is('api/v1/*')) {
+                return response()->json([
+                    'message' => 'You are not logged in.'
+                ], 401);
+            }
+
+            return $e->render($request);
+
+        });
     })->create();
