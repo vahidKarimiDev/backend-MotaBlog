@@ -54,5 +54,18 @@ class AdminServices
         return new ServiceResult(true, $admin, 200);
     }
 
+    public function deleteAdmin(string $id): ServiceResult
+    {
+        try {
+            $admin = Admin::findOrFail($id);
+            $admin->delete();
+        } catch (ModelNotFoundException $err) {
+            return new ServiceResult(false, "Admin Not A Found :(", 404);
+        } catch (\Throwable $err) {
+            return new ServiceResult(false, $err->getMessage(), 500);
+        }
+        return new ServiceResult(true, "", 204);
+
+    }
 
 }

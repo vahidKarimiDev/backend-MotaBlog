@@ -73,6 +73,10 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $result = $this->adminServices->deleteAdmin($id);
+        if (!$result->ok) {
+            return ApiResponse::withMessage($result->data)->withStatus($result->status)->build()->response();
+        }
+        return ApiResponse::withMessage("")->withStatus($result->status)->build()->response();
     }
 }
