@@ -3,16 +3,27 @@
 namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
+use App\RestApi\Facade\ApiResponse;
+use App\Services\Post\PostServices;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+    protected PostServices $postServices;
+
+    public function __construct(PostServices $postServices)
+    {
+        $this->postServices = $postServices;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $result = $this->postServices->getAllPost();
+        return ApiResponse::withData($result)->build()->response();
     }
 
     /**

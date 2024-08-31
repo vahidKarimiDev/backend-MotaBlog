@@ -15,7 +15,7 @@ class Category extends Model
 
 
 
-    public function psot()
+    public function psots()
     {
         return $this->belongsToMany(Post::class);
     }

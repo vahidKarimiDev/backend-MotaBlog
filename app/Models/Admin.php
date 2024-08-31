@@ -22,6 +22,13 @@ class Admin extends Authenticatable
 
     protected $hidden = [
         "verify_phone",
+        "password"
     ];
+
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
+    }
+
 
 }

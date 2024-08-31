@@ -9,7 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $table = 'post';
+    protected $table = 'posts';
     protected $fillable = [
         "title",
         "description",
@@ -28,5 +28,10 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
     }
 }

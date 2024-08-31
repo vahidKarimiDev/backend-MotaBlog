@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text("description");
             $table->string("slug")->unique();
             $table->json("photos");
-            $table->foreignId("categories_id")->constrained(table: 'categories');
+            $table->foreignId("category_id")->constrained(table: 'categories');
             $table->foreignId("admin_id")->constrained(table: "admin", indexName: "id")->cascadeOnDelete();
             $table->boolean("status")->default(0);
             $table->timestamps();
