@@ -11,9 +11,7 @@ use function League\Flysystem\UnableToResolveFilesystemMount;
 
 class AdminController extends Controller
 {
-
     protected $adminServices;
-
 
     public function __construct(AdminServices $adminServices)
     {
@@ -38,7 +36,10 @@ class AdminController extends Controller
     {
         $data = $request->validated();
         $result = $this->adminServices->createAdmin($data);
-        return ApiResponse::withData($result)->withMessage("create User Success Fully :)")->withStatus(201)->build()->response();
+        if (!$result->ok) {
+            return ApiResponse::withMessage($result->data)->withStatus($result->status)->build()->response();
+        }
+        return ApiResponse::withMessage("Create User Success Fully :)")->withData($result->data)->withStatus($result->status)->build()->response();
     }
 
     /**

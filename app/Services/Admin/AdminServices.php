@@ -16,7 +16,7 @@ class AdminServices
         return $admins;
     }
 
-    public function createAdmin(array $request)
+    public function createAdmin(array $request): ServiceResult
     {
         try {
             $request['password'] = Hash::make($request['password'], [
@@ -24,9 +24,9 @@ class AdminServices
             ]);
             $result = Admin::create($request);
         } catch (\Throwable $err) {
-            return ApiResponse::withMessage($err->getMessage())->withStatus(500)->build()->response();
+            return new ServiceResult(false, $err->getMessage(), 500);
         }
-        return $result;
+        return new ServiceResult(true, $result, 201);
     }
 
     public function showAdmin(string $id): ServiceResult
