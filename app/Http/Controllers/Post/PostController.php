@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\PostStoreRequest;
+use App\Models\Post;
 use App\RestApi\Facade\ApiResponse;
 use App\Services\Post\PostServices;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 class PostController extends Controller
 {
@@ -15,6 +18,8 @@ class PostController extends Controller
     public function __construct(PostServices $postServices)
     {
         $this->postServices = $postServices;
+
+//        $this->middleware("auth:sanctum")->except(['index', "show"]);
     }
 
     /**
@@ -23,15 +28,22 @@ class PostController extends Controller
     public function index()
     {
         $result = $this->postServices->getAllPost();
-        return ApiResponse::withData($result)->build()->response();
+        if (!$result->ok) {
+            return ApiResponse::withMessage($result->data)->withStatus($result->status)->build()->response();
+        }
+        return ApiResponse::withData($result->data)->withStatus($result->status)->build()->response();
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostStoreRequest $request)
     {
-        //
+        $result = $this->postServices->createPost($request);
+        if (!$result->ok) {
+            return ApiResponse::withMessage($result->data)->withStatus($result->status)->build()->response();
+        }
+        return ApiResponse::withData($result->data)->withStatus($result->status)->build()->response();
     }
 
     /**
@@ -39,7 +51,9 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $psot = Post::find($id);
+        $psot->photos = json_decode($psot->photos, true);
+        return response()->json($psot);
     }
 
     /**
