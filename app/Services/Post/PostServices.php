@@ -24,7 +24,32 @@ class PostServices
     }
 
 
+    public function createPost($request): ServiceResult
+    {
+        try {
+            $paths = [];
 
+            if ($request->hasFile("photos")) {
+                foreach ($request->file("photos") as $key => $file) {
+                    $path = $file->store("Photos");
+                    $paths[] = Storage::url($path);
+                }
+            }
+
+            $post = new Post();
+            $post->title = $request->title;
+            $post->description = $request->description;
+            $post->slug = $request->slug;
+            $post->photos = json_encode($paths);
+            $post->category_id = $request->categories_id;
+            $post->admin_id = $request->admin_id;
+            $post->save();
+
+            return new ServiceResult(ok: true, data: $post, status: 201);
+        } catch (\Throwable $err) {
+            return new ServiceResult(ok: false, data: $err->getMessage(), status: 500);
+        }
+    }
 
 
 }
