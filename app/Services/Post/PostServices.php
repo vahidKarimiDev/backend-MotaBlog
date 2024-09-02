@@ -54,7 +54,7 @@ class PostServices
     }
 
 
-    public function showOnePost(string $id)
+    public function showOnePost(string $id): ServiceResult
     {
         try {
             $post = Post::findOrFail($id);
@@ -105,6 +105,23 @@ class PostServices
 
         return new ServiceResult(ok: true, data: $post, status: 200);
     }
+
+    public function deletePost(string $id): ServiceResult
+    {
+        try {
+            $post = Post::findOrFail($id);
+            foreach ($post->photos as $photo) {
+                Storage::delete($photo);
+            }
+            $post->delete();
+        } catch (ModelNotFoundException $err) {
+            return new ServiceResult(ok: false, data: "Post Not A Found :(", status: 404);
+        } catch (\Throwable $err) {
+            return new ServiceResult(ok: false, data: $err->getMessage(), status: 500);
+        }
+        return new ServiceResult(ok: true, data: [], status: 204);
+    }
+
     protected function changePathToUrl($paths)
     {
         $urls = [];
