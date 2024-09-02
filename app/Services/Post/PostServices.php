@@ -54,7 +54,20 @@ class PostServices
     }
 
 
+    public function showOnePost(string $id)
+    {
+        try {
+            $post = Post::findOrFail($id);
+            $post->photos = $this->changePathToUrl(json_decode($post->photos, true));
 
+            $post->load(['admin', 'category']);
+        } catch (ModelNotFoundException $err) {
+            return new ServiceResult(ok: false, data: "post Not A Found :)", status: 404);
+        } catch (\Throwable $err) {
+            return new ServiceResult(ok: false, data: $err->getMessage(), status: 500);
+        }
+        return new ServiceResult(ok: true, data: ShowPostResource::make($post), status: 200);
+    }
 
     public function updatePost($request, string $id): ServiceResult
     {
