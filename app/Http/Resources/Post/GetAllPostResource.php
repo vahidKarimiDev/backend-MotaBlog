@@ -23,6 +23,7 @@ class GetAllPostResource extends JsonResource
             "created_at" => $this->created_at,
             "admin_id" => $this->admin->id,
             "admin_userName" => $this->admin->userName,
+            "admin_profile" => $this->admin->profile,
             "category" => $this->category->title,
         ];
     }

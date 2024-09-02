@@ -34,8 +34,7 @@ class AdminController extends Controller
      */
     public function store(AdminStoreRequest $request)
     {
-        $data = $request->validated();
-        $result = $this->adminServices->createAdmin($data);
+        $result = $this->adminServices->createAdmin($request);
         if (!$result->ok) {
             return ApiResponse::withMessage($result->data)->withStatus($result->status)->build()->response();
         }

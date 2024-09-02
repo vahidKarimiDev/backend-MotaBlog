@@ -5,6 +5,7 @@ namespace App\Http\Requests\Admin;
 use App\Http\Api\ApiRequest;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 
 class AdminStoreRequest extends ApiRequest
 {
@@ -25,7 +26,9 @@ class AdminStoreRequest extends ApiRequest
     {
         return [
             "userName" => ['required', Rule::unique("admin", "userName")],
-            "email" => ['required',"email", Rule::unique("admin", "email")],
+            "email" => ['required', "email", Rule::unique("admin", "email")],
+            "description" => ['nullable'],
+            "profile" => ['sometimes', "file", File::image()],
             "phone" => ['required', 'max:11', Rule::unique("admin", "phone")],
             "password" => ['required', "min:6"],
         ];

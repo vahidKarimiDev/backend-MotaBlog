@@ -15,7 +15,7 @@ class Post extends Model
         "description",
         "photos",
         "slug",
-        "categories_id",
+        "category_id",
         "admin_id",
         "status",
     ];

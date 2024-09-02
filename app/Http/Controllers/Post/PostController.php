@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\PostStoreRequest;
+use App\Http\Requests\Post\PostUpdateRequest;
 use App\Models\Post;
 use App\RestApi\Facade\ApiResponse;
 use App\Services\Post\PostServices;
@@ -51,17 +52,25 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        $psot = Post::find($id);
-        $psot->photos = json_decode($psot->photos, true);
-        return response()->json($psot);
+        $result = $this->postServices->showOnePost($id);
+        if (!$result->ok) {
+            return ApiResponse::withMessage($result->data)->withStatus($result->status)->build()->response();
+        }
+
+        return ApiResponse::withData($result->data)->withStatus($result->status)->build()->response();
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PostUpdateRequest $request, string $id)
     {
-        //
+        $result = $this->postServices->updatePost($request, $id);
+        if (!$result->ok) {
+            return ApiResponse::withMessage($result->data)->withStatus($result->status)->build()->response();
+        }
+        return ApiResponse::withData($result->data)->withStatus($result->status)->build()->response();
+
     }
 
     /**

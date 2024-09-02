@@ -17,6 +17,8 @@ class Admin extends Authenticatable
         "userName",
         "email",
         "phone",
+        "profile",
+        "description",
         "password",
     ];
 
@@ -29,6 +31,4 @@ class Admin extends Authenticatable
     {
         return $this->belongsToMany(Post::class);
     }
-
-
 }
