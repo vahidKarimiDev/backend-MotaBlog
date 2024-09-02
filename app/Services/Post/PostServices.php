@@ -69,41 +69,7 @@ class PostServices
         return new ServiceResult(ok: true, data: ShowPostResource::make($post), status: 200);
     }
 
-    public function updatePost($request, string $id): ServiceResult
-    {
 
-        try {
-            $post = Post::findOrFail($id);
-
-            $paths = [];
-            if ($request->hasFile("photos")) {
-                $files = $request->file("photos");
-                foreach ($files as $file) {
-                    $path = $file->store("Photos");
-                    $paths[] = $path;
-                }
-            }
-
-            $data = $request->only([
-                "title",
-                "description",
-                "slug",
-                "category_id",
-                "status",
-            ]);
-
-            if (!empty($paths)) {
-                $data['photos'] = json_encode($paths);
-            }
-            $post->update($data);
-        } catch (ModelNotFoundException $err) {
-            return new ServiceResult(ok: false, data: "Post Not A Found  :)", status: 404);
-        } catch (\Throwable $err) {
-            return new ServiceResult(ok: false, data: $err->getMessage(), status: 500);
-        }
-
-        return new ServiceResult(ok: true, data: $post, status: 200);
-    }
 
     protected function changePathToUrl($paths)
     {
