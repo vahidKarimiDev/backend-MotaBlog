@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 
 class PostServices
 {
-
     public function getAllPost(): ServiceResult
     {
         try {
@@ -24,7 +23,6 @@ class PostServices
         }
         return new ServiceResult(ok: true, data: GetAllPostResource::collection($posts), status: 200);
     }
-
 
     public function createPost($request): ServiceResult
     {
@@ -53,7 +51,6 @@ class PostServices
         }
     }
 
-
     public function showOnePost(string $id): ServiceResult
     {
         try {
@@ -68,7 +65,6 @@ class PostServices
         }
         return new ServiceResult(ok: true, data: ShowPostResource::make($post), status: 200);
     }
-
 
     public function updatePost($request, string $id): ServiceResult
     {
@@ -98,7 +94,7 @@ class PostServices
             }
             $post->update($data);
         } catch (ModelNotFoundException $err) {
-            return new ServiceResult(ok: false, data: "Post Not A Found  :)", status: 404);
+            return new ServiceResult(ok: false, data: "Post Not A Found :)", status: 404);
         } catch (\Throwable $err) {
             return new ServiceResult(ok: false, data: $err->getMessage(), status: 500);
         }
@@ -128,9 +124,6 @@ class PostServices
         foreach ($paths as $path) {
             $urls[] = Storage::url($path);
         }
-
         return $urls;
     }
-
-
 }

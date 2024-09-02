@@ -13,7 +13,6 @@ use Illuminate\Http\UploadedFile;
 
 class PostController extends Controller
 {
-
     protected PostServices $postServices;
 
     public function __construct(PostServices $postServices)
@@ -70,7 +69,6 @@ class PostController extends Controller
             return ApiResponse::withMessage($result->data)->withStatus($result->status)->build()->response();
         }
         return ApiResponse::withData($result->data)->withStatus($result->status)->build()->response();
-
     }
 
     /**
