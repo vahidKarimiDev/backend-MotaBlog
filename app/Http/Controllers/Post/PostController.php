@@ -78,6 +78,10 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $result = $this->postServices->deletePost($id);
+        if (!$result->ok) {
+            return ApiResponse::withMessage($result->data)->withStatus($result->status)->build()->response();
+        }
+        return ApiResponse::withData($result->data)->withStatus($result->status)->build()->response();
     }
 }

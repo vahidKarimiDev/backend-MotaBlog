@@ -110,7 +110,7 @@ class PostServices
     {
         try {
             $post = Post::findOrFail($id);
-            foreach ($post->photos as $photo) {
+            foreach (json_decode($post->photos, true) as $photo) {
                 Storage::delete($photo);
             }
             $post->delete();
