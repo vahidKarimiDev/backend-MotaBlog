@@ -7,7 +7,6 @@ use App\Http\Requests\Admin\AdminStoreRequest;
 use App\Http\Requests\Admin\AdminUpdateRequest;
 use App\RestApi\Facade\ApiResponse;
 use App\Services\Admin\AdminServices;
-use function League\Flysystem\UnableToResolveFilesystemMount;
 
 class AdminController extends Controller
 {
@@ -17,11 +16,59 @@ class AdminController extends Controller
     {
         $this->adminServices = $adminServices;
 
-        $this->middleware("auth:sanctum");
+//        $this->middleware("auth:sanctum");
     }
 
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/admin",
+     *     tags={"Admin 👨‍💼"},
+     *     summary="Get All Admins",
+     *     security={{"sanctum" : {}}},
+     *     @OA\Parameter(
+     *         name="Token",
+     *         in="header",
+     *         required=true,
+     *         example="Token Admin"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Get All Admins",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="array",
+     *                 @OA\Items(
+     *                     @OA\Property(
+     *                         property="id",
+     *                         type="integer",
+     *                         example=1
+     *                     ),
+     *                     @OA\Property(
+     *                         property="userName",
+     *                         type="string",
+     *                         example="mona"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="email",
+     *                         type="string",
+     *                         example="mona@gmail.com"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="phone",
+     *                         type="string",
+     *                         example="09150300174"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="created_at",
+     *                         type="string",
+     *                         example="date"
+     *                     )
+     *                 )
+     *             )
+     *         )
+     *     )
+     * )
      */
     public function index()
     {
@@ -30,7 +77,91 @@ class AdminController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/admin",
+     *     tags={"Admin 👨‍💼"},
+     *     summary="Create New Admin",
+     *     security={{"sanctum" : {}}},
+     *     @OA\Parameter(
+     *         name="Token",
+     *         in="header",
+     *         required=true,
+     *         example="Token Admin"
+     *     ),
+     *     @OA\Parameter(
+     *         name="Show Error",
+     *         in="header",
+     *         required=true,
+     *         example="Accept = application/json"
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="userName",
+     *                     type="string",
+     *                     example="vahid karimi"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string",
+     *                     example="vahid@gmail.com"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="phone",
+     *                     type="string",
+     *                     example="09150300174"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string",
+     *                     example="vahid..0101"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Admin created successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Create User Success Fully :)"
+     *             ),
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="object",
+     *                 @OA\Property(
+     *                     property="id",
+     *                     type="integer",
+     *                     example=1
+     *                 ),
+     *                 @OA\Property(
+     *                     property="userName",
+     *                     type="string",
+     *                     example="vahid karimi"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string",
+     *                     example="vahid@gmail.com"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="phone",
+     *                     type="string",
+     *                     example="09150300174"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request"
+     *     )
+     * )
      */
     public function store(AdminStoreRequest $request)
     {
@@ -42,7 +173,53 @@ class AdminController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/admin/{admin_id}",
+     *     tags={"Admin 👨‍💼"},
+     *     summary="Get One Admin",
+     *     security={{"sanctum" : {}}},
+     *     @OA\Parameter(
+     *         name="Token",
+     *         in="header",
+     *         required=true,
+     *         example="Token Admin"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Get One Admin",
+     *         @OA\JsonContent(
+ *                 @OA\Property(
+ *                     property="id",
+ *                     type="integer",
+ *                     example=1
+ *                 ),
+ *                 @OA\Property(
+ *                     property="userName",
+ *                     type="string",
+ *                     example="mona"
+ *                 ),
+ *                 @OA\Property(
+ *                     property="email",
+ *                     type="string",
+ *                     example="mona@gmail.com"
+ *                 ),
+ *                 @OA\Property(
+ *                     property="phone",
+ *                     type="string",
+ *                     example="09150300174"
+ *                 ),
+ *                 @OA\Property(
+ *                     property="created_at",
+ *                     type="string",
+ *                     example="date"
+ *                 )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Admin not found"
+     *     )
+     * )
      */
     public function show(string $id)
     {
@@ -52,9 +229,92 @@ class AdminController extends Controller
         }
         return ApiResponse::withData($admin->data)->build()->response();
     }
-
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/admin/{admin_id}",
+     *     tags={"Admin 👨‍💼"},
+     *     summary="Update Admin",
+     *     security={{"sanctum" : {}}},
+     *     @OA\Parameter(
+     *         name="Token",
+     *         in="header",
+     *         required=true,
+     *         example="Token Admin"
+     *     ),
+     *     @OA\Parameter(
+     *         name="Show Error",
+     *         in="header",
+     *         required=true,
+     *         example="Accept = application/json"
+     *     ),
+     *     @OA\RequestBody(
+     *         required=false,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="userName",
+     *                     type="string",
+     *                     example="vahid karimi"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string",
+     *                     example="vahid@gmail.com"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="phone",
+     *                     type="string",
+     *                     example="09150300174"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string",
+     *                     example="vahid..0101"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Updated Admin Success Fully :))",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Update Admin Success Fully :)"
+     *             ),
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="object",
+     *                 @OA\Property(
+     *                     property="id",
+     *                     type="integer",
+     *                     example=1
+     *                 ),
+     *                 @OA\Property(
+     *                     property="userName",
+     *                     type="string",
+     *                     example="vahid karimi"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string",
+     *                     example="vahid@gmail.com"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="phone",
+     *                     type="string",
+     *                     example="09150300174"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request"
+     *     )
+     * )
      */
     public function update(AdminUpdateRequest $request, string $id)
     {
@@ -67,7 +327,22 @@ class AdminController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/admin/{admin_id}",
+     *     tags={"Admin 👨‍💼"},
+     *     summary="Delete Admin ",
+     *     security={{"sanctum" : {}}},
+     *     @OA\Parameter(
+     *         name="Token",
+     *         in="header",
+     *         required=true,
+     *         example="Token Admin"
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Delete Admin Success Fully :))",
+     *     )
+     * )
      */
     public function destroy(string $id)
     {
