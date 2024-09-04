@@ -139,7 +139,7 @@ class PostController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/post/{post_id}",
+     *     path="/blog/{blog_id}",
      *     tags={"Post 📃"},
      *     summary="Delete Post ",
      *     security={{"sanctum" : {}}},
