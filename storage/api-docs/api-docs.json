@@ -616,6 +616,108 @@
                     }
                 ]
             }
+        },
+        "/blog/{blog_id}": {
+            "put": {
+                "tags": [
+                    "Post 📃"
+                ],
+                "summary": "Update Admin",
+                "operationId": "0c932f1a440f65e76564da672d3eb1b6",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    },
+                    {
+                        "name": "Show Error",
+                        "in": "header",
+                        "required": true,
+                        "example": "Accept = application/json"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "title ... "
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "description"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "slug"
+                                    },
+                                    "photos": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "File Image"
+                                        }
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "status": {
+                                        "type": "boolean",
+                                        "example": "true Or False"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated Admin Success Fully :))"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/post/{post_id}": {
+            "delete": {
+                "tags": [
+                    "Post 📃"
+                ],
+                "summary": "Delete Post ",
+                "operationId": "29ded279b52f75d0b1b2f8b4536ca7da",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Delete Post Success Fully :))"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
         }
     },
     "tags": [
@@ -624,6 +726,9 @@
         },
         {
             "name": "Admin 👨‍💼"
+        },
+        {
+            "name": "Post 📃"
         },
         {
             "name": "Contact 🤝"

@@ -60,7 +60,73 @@ class PostController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/blog/{blog_id}",
+     *     tags={"Post 📃"},
+     *     summary="Update Admin",
+     *     security={{"sanctum" : {}}},
+     *     @OA\Parameter(
+     *         name="Token",
+     *         in="header",
+     *         required=true,
+     *         example="Token Admin"
+     *     ),
+     *     @OA\Parameter(
+     *         name="Show Error",
+     *         in="header",
+     *         required=true,
+     *         example="Accept = application/json"
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="title",
+     *                     type="string",
+     *                     example="title ... "
+     *                 ),
+     *                 @OA\Property(
+     *                     property="description",
+     *                     type="string",
+     *                     example="description"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="slug",
+     *                     type="string",
+     *                     example="slug"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="photos",
+     *                     type="array",
+     *                 @OA\Items(
+     *                      type="string",
+     *                      example="File Image"
+     *                 )
+     *               ),
+ *                    @OA\Property(
+     *                      property="category_id",
+     *                      type="integer",
+     *                      example="1"
+     *                 ),
+     *                 @OA\Property(
+     *                      property="status",
+     *                      type="boolean",
+     *                      example="true Or False"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Updated Admin Success Fully :))",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request"
+     *     )
+     * )
      */
     public function update(PostUpdateRequest $request, string $id)
     {
@@ -72,7 +138,22 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/post/{post_id}",
+     *     tags={"Post 📃"},
+     *     summary="Delete Post ",
+     *     security={{"sanctum" : {}}},
+     *     @OA\Parameter(
+     *         name="Token",
+     *         in="header",
+     *         required=true,
+     *         example="Token Admin"
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Delete Post Success Fully :))",
+     *     )
+     * )
      */
     public function destroy(string $id)
     {
