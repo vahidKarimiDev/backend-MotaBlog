@@ -16,7 +16,7 @@ class AdminController extends Controller
     {
         $this->adminServices = $adminServices;
 
-//        $this->middleware("auth:sanctum");
+        $this->middleware("auth:sanctum");
     }
 
     /**
