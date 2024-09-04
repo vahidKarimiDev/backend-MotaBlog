@@ -17,6 +17,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
  *  ),
  *  @OA\Tag(
      *  name="Post 📃"
+ *  ),
+ *  @OA\Tag(
+ *      name="Contact 🤝"
  *  )
  * */
 abstract class Controller extends \Illuminate\Routing\Controller

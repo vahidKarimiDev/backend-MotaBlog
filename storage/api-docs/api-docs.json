@@ -407,6 +407,215 @@
                     }
                 }
             }
+        },
+        "/contact": {
+            "get": {
+                "tags": [
+                    "Contact 🤝"
+                ],
+                "summary": "Get All Contact",
+                "operationId": "14f5f8efcb0f195e4db481f13f886522",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get All Contact",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "userName": {
+                                                        "type": "string",
+                                                        "example": "mona"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "mona@gmail.com"
+                                                    },
+                                                    "subject": {
+                                                        "type": "string",
+                                                        "example": "test subject"
+                                                    },
+                                                    "text": {
+                                                        "type": "text",
+                                                        "example": "text ..."
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Contact 🤝"
+                ],
+                "summary": "Create New Contact",
+                "operationId": "0a5327cbce0b6c982c94eb87eb99f50d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "userName": {
+                                        "type": "string",
+                                        "example": "vahid karimi"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "vahid@gmail.com"
+                                    },
+                                    "subject": {
+                                        "type": "string",
+                                        "example": "test"
+                                    },
+                                    "text": {
+                                        "type": "text",
+                                        "example": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Create New Contact :)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Create Contact Success Fully :)"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/contact/{contact_id}": {
+            "get": {
+                "tags": [
+                    "Contact 🤝"
+                ],
+                "summary": "Get One Contact",
+                "operationId": "6c377a0e221126b7b4fa2e70928f9519",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get One Contact",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "userName": {
+                                                        "type": "string",
+                                                        "example": "mona"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "mona@gmail.com"
+                                                    },
+                                                    "subject": {
+                                                        "type": "string",
+                                                        "example": "test subject"
+                                                    },
+                                                    "text": {
+                                                        "type": "text",
+                                                        "example": "text ..."
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Contact 🤝"
+                ],
+                "summary": "Delete Contact ",
+                "operationId": "fe86fd03180a44e80c01773ddf532fd9",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Delete Contact Success Fully :))"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
         }
     },
     "tags": [
@@ -415,6 +624,9 @@
         },
         {
             "name": "Admin 👨‍💼"
+        },
+        {
+            "name": "Contact 🤝"
         }
     ]
 }
