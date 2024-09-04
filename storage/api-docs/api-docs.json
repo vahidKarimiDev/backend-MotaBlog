@@ -1,0 +1,420 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Mota Blog",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "api/v1"
+        }
+    ],
+    "paths": {
+        "/admin": {
+            "get": {
+                "tags": [
+                    "Admin 👨‍💼"
+                ],
+                "summary": "Get All Admins",
+                "operationId": "e8be40c06ad9d292d2dda9e8f81005bc",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get All Admins",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "userName": {
+                                                        "type": "string",
+                                                        "example": "mona"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "mona@gmail.com"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string",
+                                                        "example": "09150300174"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "date"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Admin 👨‍💼"
+                ],
+                "summary": "Create New Admin",
+                "operationId": "3e6aab274e70da4d84ff8a6e7d4b3665",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    },
+                    {
+                        "name": "Show Error",
+                        "in": "header",
+                        "required": true,
+                        "example": "Accept = application/json"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "userName": {
+                                        "type": "string",
+                                        "example": "vahid karimi"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "vahid@gmail.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "09150300174"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "vahid..0101"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Admin created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Create User Success Fully :)"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "userName": {
+                                                    "type": "string",
+                                                    "example": "vahid karimi"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "vahid@gmail.com"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "09150300174"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/admin/{admin_id}": {
+            "get": {
+                "tags": [
+                    "Admin 👨‍💼"
+                ],
+                "summary": "Get One Admin",
+                "operationId": "1e377e901ca3602be800f0302b59f742",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get One Admin",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "userName": {
+                                            "type": "string",
+                                            "example": "mona"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "mona@gmail.com"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "09150300174"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "date"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Admin not found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Admin 👨‍💼"
+                ],
+                "summary": "Update Admin",
+                "operationId": "a0914e434aa16a6888953f027f81d76b",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    },
+                    {
+                        "name": "Show Error",
+                        "in": "header",
+                        "required": true,
+                        "example": "Accept = application/json"
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "userName": {
+                                        "type": "string",
+                                        "example": "vahid karimi"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "vahid@gmail.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "09150300174"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "vahid..0101"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated Admin Success Fully :))",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Update Admin Success Fully :)"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "userName": {
+                                                    "type": "string",
+                                                    "example": "vahid karimi"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "vahid@gmail.com"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "09150300174"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Admin 👨‍💼"
+                ],
+                "summary": "Delete Admin ",
+                "operationId": "ea1186c4f1cddb809a87ab0ce6eb71c5",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Delete Admin Success Fully :))"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth 🔒"
+                ],
+                "summary": "Login",
+                "operationId": "a922ec9e90c88a61e7792b86e254b5d3",
+                "parameters": [
+                    {
+                        "name": "Show Error",
+                        "in": "header",
+                        "required": true,
+                        "example": "Accept = application/json"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "vahid@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "vahid..0101"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login Success Fully :))",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "admin Token"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth 🔒"
+        },
+        {
+            "name": "Admin 👨‍💼"
+        }
+    ]
+}
