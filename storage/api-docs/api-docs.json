@@ -617,6 +617,141 @@
                 ]
             }
         },
+        "/blog": {
+            "get": {
+                "tags": [
+                    "Post 📃"
+                ],
+                "summary": "Get All Blog",
+                "operationId": "b8820099d2e00efa8098b8fbce3fa4a0",
+                "responses": {
+                    "200": {
+                        "description": "Get All Blog",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "title": {
+                                            "type": "string",
+                                            "example": "test title"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "description"
+                                        },
+                                        "slug": {
+                                            "type": "string",
+                                            "example": "mona@gmail.com"
+                                        },
+                                        "photos": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "Url Image"
+                                            }
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "date"
+                                        },
+                                        "category": {
+                                            "type": "string",
+                                            "example": "category name"
+                                        },
+                                        "admin_name": {
+                                            "type": "string",
+                                            "example": "admin name"
+                                        },
+                                        "admin_profile": {
+                                            "type": "string",
+                                            "example": "admin profile"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Post 📃"
+                ],
+                "summary": "Create Blog",
+                "operationId": "e22250a690ede7430ed40751ecb345cf",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    },
+                    {
+                        "name": "Show Error",
+                        "in": "header",
+                        "required": true,
+                        "example": "Accept = application/json"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "title ... "
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "description"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "slug"
+                                    },
+                                    "photos": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "File Image"
+                                        }
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "admin_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "status": {
+                                        "type": "boolean",
+                                        "example": "true Or False"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Create Blog Success Fully :))"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/blog/{blog_id}": {
             "get": {
                 "tags": [
@@ -624,14 +759,6 @@
                 ],
                 "summary": "Get One Blog",
                 "operationId": "4d0459986620b0a9386e3779fa95d7ed",
-                "parameters": [
-                    {
-                        "name": "Token",
-                        "in": "header",
-                        "required": true,
-                        "example": "Token Admin"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Get One Blog",
@@ -684,18 +811,13 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
+                }
             },
             "put": {
                 "tags": [
                     "Post 📃"
                 ],
-                "summary": "Update Admin",
+                "summary": "Update Blog",
                 "operationId": "0c932f1a440f65e76564da672d3eb1b6",
                 "parameters": [
                     {
@@ -752,7 +874,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Updated Admin Success Fully :))"
+                        "description": "Updated Blog Success Fully :))"
                     },
                     "400": {
                         "description": "Bad Request"
@@ -768,7 +890,7 @@
                 "tags": [
                     "Post 📃"
                 ],
-                "summary": "Delete Post ",
+                "summary": "Delete Blog ",
                 "operationId": "e4d7ebdfc33badba202ddb5ab8cf0b96",
                 "parameters": [
                     {
@@ -780,7 +902,7 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Delete Post Success Fully :))"
+                        "description": "Delete Blog Success Fully :))"
                     }
                 },
                 "security": [
