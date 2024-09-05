@@ -47,7 +47,72 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/blog/{blog_id}",
+     *     tags={"Post 📃"},
+     *     summary="Get One Blog",
+     *     security={{"sanctum" : {}}},
+     *     @OA\Parameter(
+     *         name="Token",
+     *         in="header",
+     *         required=true,
+     *         example="Token Admin"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Get One Blog",
+     *         @OA\JsonContent(
+     *                     @OA\Property(
+     *                         property="title",
+     *                         type="string",
+     *                         example="test title"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="description",
+     *                         type="string",
+     *                         example="description"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="slug",
+     *                         type="string",
+     *                         example="mona@gmail.com"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="photos",
+     *                         type="array",
+     *                         @OA\Items(
+     *                      type="string",
+     *                      example="Url Image"
+    )
+     *                     ),
+     *                     @OA\Property(
+     *                         property="created_at",
+     *                         type="string",
+     *                         example="date"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="category",
+     *                         type="string",
+     *                         example="category name"
+     *                     ),
+     *                       @OA\Property(
+     *                         property="admin_name",
+     *                         type="string",
+     *                         example="admin name"
+     *                     ),
+     *                        @OA\Property(
+     *                         property="admin_profile",
+     *                         type="string",
+     *                         example="admin profile"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="admin_desc",
+     *                         type="string",
+     *                         example="admin desc"
+     *                     ),
+     *         )
+     *     )
+     * )
      */
     public function show(string $id)
     {
@@ -63,7 +128,7 @@ class PostController extends Controller
      * @OA\Put(
      *     path="/blog/{blog_id}",
      *     tags={"Post 📃"},
-     *     summary="Update Admin",
+     *     summary="Update Blog",
      *     security={{"sanctum" : {}}},
      *     @OA\Parameter(
      *         name="Token",
@@ -105,7 +170,7 @@ class PostController extends Controller
      *                      example="File Image"
      *                 )
      *               ),
- *                    @OA\Property(
+     *                    @OA\Property(
      *                      property="category_id",
      *                      type="integer",
      *                      example="1"
@@ -120,7 +185,7 @@ class PostController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Updated Admin Success Fully :))",
+     *         description="Updated Blog Success Fully :))",
      *     ),
      *     @OA\Response(
      *         response=400,
@@ -141,7 +206,7 @@ class PostController extends Controller
      * @OA\Delete(
      *     path="/blog/{blog_id}",
      *     tags={"Post 📃"},
-     *     summary="Delete Post ",
+     *     summary="Delete Blog ",
      *     security={{"sanctum" : {}}},
      *     @OA\Parameter(
      *         name="Token",
@@ -151,7 +216,7 @@ class PostController extends Controller
      *     ),
      *     @OA\Response(
      *         response=204,
-     *         description="Delete Post Success Fully :))",
+     *         description="Delete Blog Success Fully :))",
      *     )
      * )
      */

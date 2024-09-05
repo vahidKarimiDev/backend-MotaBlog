@@ -618,6 +618,79 @@
             }
         },
         "/blog/{blog_id}": {
+            "get": {
+                "tags": [
+                    "Post 📃"
+                ],
+                "summary": "Get One Blog",
+                "operationId": "4d0459986620b0a9386e3779fa95d7ed",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get One Blog",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "title": {
+                                            "type": "string",
+                                            "example": "test title"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "description"
+                                        },
+                                        "slug": {
+                                            "type": "string",
+                                            "example": "mona@gmail.com"
+                                        },
+                                        "photos": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "Url Image"
+                                            }
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "date"
+                                        },
+                                        "category": {
+                                            "type": "string",
+                                            "example": "category name"
+                                        },
+                                        "admin_name": {
+                                            "type": "string",
+                                            "example": "admin name"
+                                        },
+                                        "admin_profile": {
+                                            "type": "string",
+                                            "example": "admin profile"
+                                        },
+                                        "admin_desc": {
+                                            "type": "string",
+                                            "example": "admin desc"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
             "put": {
                 "tags": [
                     "Post 📃"
