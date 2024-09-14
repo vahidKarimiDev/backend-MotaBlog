@@ -408,6 +408,164 @@
                 }
             }
         },
+        "/category": {
+            "get": {
+                "tags": [
+                    "Category 🔴"
+                ],
+                "summary": "Get All Category",
+                "operationId": "b5b212374b7427fe4a0e8e12592f78c9",
+                "responses": {
+                    "200": {
+                        "description": "Get All Category",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "title": {
+                                            "type": "string",
+                                            "example": "test title"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "date"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Category 🔴"
+                ],
+                "summary": "Create Category",
+                "operationId": "b0e86baa6bbe0784e44527df00c7d5f7",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    },
+                    {
+                        "name": "Show Error",
+                        "in": "header",
+                        "required": true,
+                        "example": "Accept = application/json"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "title ... "
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Create Category Success Fully :))"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/category/{category_id}": {
+            "put": {
+                "tags": [
+                    "Category 🔴"
+                ],
+                "summary": "Update Category",
+                "operationId": "b5ed47d9bccbb4037f35587b91ae2ef0",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    },
+                    {
+                        "name": "Show Error",
+                        "in": "header",
+                        "required": true,
+                        "example": "Accept = application/json"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "title ... "
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update Category Success Fully :))"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Category 🔴"
+                ],
+                "summary": "Delete Category",
+                "operationId": "ae49bdb86bdd847ec5068fe9a4c167e9",
+                "parameters": [
+                    {
+                        "name": "Token",
+                        "in": "header",
+                        "required": true,
+                        "example": "Token Admin"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Delete Blog Success Fully :))"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/contact": {
             "get": {
                 "tags": [
@@ -708,6 +866,10 @@
                                         "type": "string",
                                         "example": "description"
                                     },
+                                    "miniDesc": {
+                                        "type": "string",
+                                        "example": "miniDesc"
+                                    },
                                     "slug": {
                                         "type": "string",
                                         "example": "slug"
@@ -847,6 +1009,10 @@
                                         "type": "string",
                                         "example": "description"
                                     },
+                                    "miniDesc": {
+                                        "type": "string",
+                                        "example": "miniDesc"
+                                    },
                                     "slug": {
                                         "type": "string",
                                         "example": "slug"
@@ -925,6 +1091,9 @@
         },
         {
             "name": "Contact 🤝"
+        },
+        {
+            "name": "Category 🔴"
         }
     ]
 }

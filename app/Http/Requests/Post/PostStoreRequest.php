@@ -26,6 +26,7 @@ class PostStoreRequest extends ApiRequest
         return [
             "title" => ['required'],
             "description" => ['required'],
+            "miniDesc" => ['required'],
             "photos.*" => ['required', "file"],
             "slug" => ['required', Rule::unique("posts", "slug")],
             "category_id" => ['required', Rule::exists("categories", "id")],

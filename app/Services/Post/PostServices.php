@@ -39,6 +39,7 @@ class PostServices
             $post = new Post();
             $post->title = $request->title;
             $post->description = $request->description;
+            $post->miniDesc = $request->miniDesc;
             $post->slug = $request->slug;
             $post->photos = json_encode($paths);
             $post->category_id = $request->category_id;
@@ -84,6 +85,7 @@ class PostServices
             $data = $request->only([
                 "title",
                 "description",
+                "miniDesc",
                 "slug",
                 "category_id",
                 "status",

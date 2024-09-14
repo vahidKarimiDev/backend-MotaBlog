@@ -18,6 +18,7 @@ class Post extends Model
         "category_id",
         "admin_id",
         "status",
+        "miniDesc"
     ];
 
     protected $hidden = [

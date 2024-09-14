@@ -18,6 +18,7 @@ class GetAllPostResource extends JsonResource
             "id" => $this->id,
             "title" => $this->title,
             "description" => $this->description,
+            "miniDesc" => $this->miniDesc,
             "photos" => $this->photos,
             "slug" => $this->slug,
             "created_at" => $this->created_at,

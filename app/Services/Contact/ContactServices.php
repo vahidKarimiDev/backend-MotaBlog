@@ -12,7 +12,6 @@ class ContactServices
     {
         try {
             $contacts = Contact::all();
-
         } catch (\Throwable $err) {
             return new ServiceResult(ok: false, data: $err->getMessage(), status: 500);
         }

@@ -31,49 +31,49 @@ class PostController extends Controller
      *         response=200,
      *         description="Get All Blog",
      *         @OA\JsonContent(
-*                     @OA\Property(
-*                         property="title",
-*                         type="string",
-*                         example="test title"
-*                     ),
-*                     @OA\Property(
-*                         property="description",
-*                         type="string",
-*                         example="description"
-*                     ),
-*                     @OA\Property(
-*                         property="slug",
-*                         type="string",
-*                         example="mona@gmail.com"
-*                     ),
-*                     @OA\Property(
-*                         property="photos",
-*                         type="array",
-*                         @OA\Items(
-*                      type="string",
-*                      example="Url Image"
-)
-*                     ),
-*                     @OA\Property(
-*                         property="created_at",
-*                         type="string",
-*                         example="date"
-*                     ),
-*                     @OA\Property(
-*                         property="category",
-*                         type="string",
-*                         example="category name"
-*                     ),
-*                       @OA\Property(
-*                         property="admin_name",
-*                         type="string",
-*                         example="admin name"
-*                     ),
-*                        @OA\Property(
-*                         property="admin_profile",
-*                         type="string",
-*                         example="admin profile"
-*                     )
+     *                     @OA\Property(
+     *                         property="title",
+     *                         type="string",
+     *                         example="test title"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="description",
+     *                         type="string",
+     *                         example="description"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="slug",
+     *                         type="string",
+     *                         example="mona@gmail.com"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="photos",
+     *                         type="array",
+     *                         @OA\Items(
+     *                      type="string",
+     *                      example="Url Image"
+    )
+     *                     ),
+     *                     @OA\Property(
+     *                         property="created_at",
+     *                         type="string",
+     *                         example="date"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="category",
+     *                         type="string",
+     *                         example="category name"
+     *                     ),
+     *                       @OA\Property(
+     *                         property="admin_name",
+     *                         type="string",
+     *                         example="admin name"
+     *                     ),
+     *                        @OA\Property(
+     *                         property="admin_profile",
+     *                         type="string",
+     *                         example="admin profile"
+     *                     )
      *         )
      *     )
      * )
@@ -119,6 +119,11 @@ class PostController extends Controller
      *                     property="description",
      *                     type="string",
      *                     example="description"
+     *                 ),
+     *                     @OA\Property(
+     *                     property="miniDesc",
+     *                     type="string",
+     *                     example="miniDesc"
      *                 ),
      *                 @OA\Property(
      *                     property="slug",
@@ -273,6 +278,11 @@ class PostController extends Controller
      *                     property="description",
      *                     type="string",
      *                     example="description"
+     *                 ),
+     *                     @OA\Property(
+     *                     property="miniDesc",
+     *                     type="string",
+     *                     example="miniDesc"
      *                 ),
      *                 @OA\Property(
      *                     property="slug",

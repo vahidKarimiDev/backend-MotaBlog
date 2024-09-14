@@ -28,6 +28,7 @@ class PostUpdateRequest extends ApiRequest
         return [
             "title" => ['sometimes', "required"],
             "description" => ['sometimes', "required"],
+            "miniDesc" => ['sometimes', "required"],
             "slug" => ['sometimes', "required", Rule::unique("posts", "slug")->ignore($postId)],
             "photos.*" => ['sometimes', "file", \Illuminate\Validation\Rules\File::image()],
             "category_id" => ['sometimes', Rule::exists("categories", "id")],
