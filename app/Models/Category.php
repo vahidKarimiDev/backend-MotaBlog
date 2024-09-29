@@ -15,9 +15,9 @@ class Category extends Model
 
 
 
-    public function psots()
+    public function posts()
     {
-        return $this->belongsToMany(Post::class);
+        return $this->hasMany(Post::class);
     }
 
 }

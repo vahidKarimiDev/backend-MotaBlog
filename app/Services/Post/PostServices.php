@@ -6,15 +6,17 @@ use App\Base\ServiceResult;
 use App\Http\Resources\Post\GetAllPostResource;
 use App\Http\Resources\Post\ShowPostResource;
 use App\Models\Post;
+use http\Env\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Storage;
 
 class PostServices
 {
-    public function getAllPost(): ServiceResult
+    public function getAllPost($request): ServiceResult
     {
         try {
-            $posts = Post::where("status", true)->with(["admin", "category"])->get();
+            $offset = $request->input('offset');
+            $posts = Post::where("status", true)->with(["admin", "category"])->skip($offset)->take(6)->get();
             foreach ($posts as $post) {
                 $post->photos = $this->changePathToUrl(json_decode($post->photos, true));
             }
@@ -44,6 +46,7 @@ class PostServices
             $post->photos = json_encode($paths);
             $post->category_id = $request->category_id;
             $post->admin_id = $request->admin_id;
+            $post->status = $request->status;
             $post->save();
 
             return new ServiceResult(ok: true, data: $post, status: 201);
@@ -52,13 +55,20 @@ class PostServices
         }
     }
 
-    public function showOnePost(string $id): ServiceResult
+    public function showOnePost(string $slug): ServiceResult
     {
         try {
-            $post = Post::findOrFail($id);
-            $post->photos = $this->changePathToUrl(json_decode($post->photos, true));
+            $post = Post::with(['admin', "category"])->where("slug", $slug)->firstOrFail();
+            $lastPost = Post::where("slug", "!=", $slug)->orderBy("created_at", "desc")->limit(3)->select("title", 'slug', 'photos')->get();
 
-            $post->load(['admin', 'category']);
+            foreach ($lastPost as $itemPost) {
+                $photos = json_decode($itemPost->photos, true);
+                $urlPhotos = $this->changePathToUrl($photos);
+                $itemPost['photo'] = $urlPhotos[0] ?? null;
+            }
+
+            $post['last_post'] = $lastPost;
+            $post->photos = $this->changePathToUrl(json_decode($post->photos, true));
         } catch (ModelNotFoundException $err) {
             return new ServiceResult(ok: false, data: "post Not A Found :)", status: 404);
         } catch (\Throwable $err) {
@@ -69,7 +79,6 @@ class PostServices
 
     public function updatePost($request, string $id): ServiceResult
     {
-
         try {
             $post = Post::findOrFail($id);
 
@@ -119,6 +128,23 @@ class PostServices
         }
         return new ServiceResult(ok: true, data: [], status: 204);
     }
+
+
+    public function uploadImage($request): ServiceResult
+    {
+        try {
+            $url = null;
+            if ($request->hasFile("image")) {
+                $file = $request->file("image");
+                $path = $file->store("Photos");
+                $url = Storage::url($path);
+            }
+        } catch (\Throwable $err) {
+            return new ServiceResult(ok: false, data: $err->getMessage(), status: 500);
+        }
+        return new ServiceResult(ok: true, data: ["url" => $url, "uploaded" => "success"], status: 201);
+    }
+
 
     protected function changePathToUrl($paths)
     {

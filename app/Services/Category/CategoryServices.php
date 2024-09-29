@@ -14,7 +14,12 @@ class CategoryServices
     public function getAllCategory(): ServiceResult
     {
         try {
-            $categories = Category::all();
+            $categories = Category::withCount("posts")->get();
+
+            $categories = $categories->map(function ($category) {
+                $category['disabled'] = $category->posts_count > 0;
+                return $category;
+            });
         } catch (\Throwable $err) {
             return new ServiceResult(ok: false, data: $err->getMessage(), status: 500);
         }

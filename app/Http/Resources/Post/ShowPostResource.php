@@ -25,6 +25,7 @@ class ShowPostResource extends JsonResource
             "admin_name" => $this->admin->userName,
             "admin_profile" => $this->admin->profile,
             "admin_desc" => $this->admin->description,
+            'last_post' => $this->last_post,
         ];
     }
 }

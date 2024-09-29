@@ -78,9 +78,9 @@ class PostController extends Controller
      *     )
      * )
      */
-    public function index()
+    public function index(Request $request)
     {
-        $result = $this->postServices->getAllPost();
+        $result = $this->postServices->getAllPost($request);
         if (!$result->ok) {
             return ApiResponse::withMessage($result->data)->withStatus($result->status)->build()->response();
         }
@@ -355,4 +355,14 @@ class PostController extends Controller
         }
         return ApiResponse::withData($result->data)->withStatus($result->status)->build()->response();
     }
+
+    public function uploadImageCkeditor (Request $request) {
+        $result = $this->postServices->uploadImage($request);
+        if (!$result->ok) {
+            return ApiResponse::withMessage($result->data)->withStatus($result->status)->build()->response();
+        }
+
+        return ApiResponse::withData($result->data)->withStatus($result->status)->build()->response();
+    }
+
 }
